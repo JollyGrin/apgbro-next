@@ -1,8 +1,7 @@
-import TheNav from '../components/TheNav';
+import SearchBar from '../components/SearchBar';
 
 export default () => (
   <div>
-    <TheNav />
-    <div>Hello!</div>
+    <SearchBar />
   </div>
 );
