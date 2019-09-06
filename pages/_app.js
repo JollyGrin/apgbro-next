@@ -18,11 +18,9 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <Container>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
-      </Container>
+      <Page>
+        <Component {...pageProps} />
+      </Page>
     );
   }
 }

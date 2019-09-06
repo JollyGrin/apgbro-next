@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { getResults } from '../lib/db';
 
 export default class SearchBar extends Component {
   render() {
