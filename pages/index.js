@@ -3,6 +3,7 @@ import SearchBar from '../components/SearchBar';
 import Filters from '../components/Filters';
 import Display from '../components/Display';
 import { getResults } from '../lib/db';
+import { filter } from 'minimatch';
 
 export default class index extends Component {
   constructor(props) {
@@ -10,7 +11,11 @@ export default class index extends Component {
     this.state = {
       searchResults: [],
       searchValue: '',
-      searchFilters: []
+      searchFilters: {
+        sort: '',
+        grade: '',
+        country: ''
+      }
     };
   }
 
@@ -20,30 +25,32 @@ export default class index extends Component {
     });
   };
 
-  triggerSearch = () => {
-    const searchInput = this.state.searchValue;
-    console.log(searchInput);
-    getResults(searchInput).then(obj => {
-      const searchResults = [];
-      // debugger;
-      obj.forEach(item => {
-        searchResults.push(item);
-      });
-      this.setState({ searchResults });
+  saveFilterState = ({ sort, grade, country }) => {
+    this.setState({
+      searchFilters: {
+        sort,
+        grade,
+        country
+      }
     });
   };
 
-  componentDidMount() {
-    // Pull the results, place in an searchResultsay, and add it to state.
-    // TODO: take this outside cDidMount and instead trigger on search click.
-    // getResults().then(obj => {
-    //   const searchResults = [];
-    //   obj.forEach(item => {
-    //     searchResults.push(item);
-    //   });
-    //   this.setState({ searchResults });
-    // });
-  }
+  triggerSearch = () => {
+    const searchInput = this.state.searchValue;
+    const filterInput = this.state.searchFilters;
+
+    getResults({ query: searchInput, sort_prop: filterInput.sort }).then(
+      obj => {
+        const searchResults = [];
+        obj.forEach(item => {
+          searchResults.push(item);
+        });
+        this.setState({ searchResults });
+      }
+    );
+  };
+
+  componentDidMount() {}
 
   render() {
     return (
@@ -59,7 +66,7 @@ export default class index extends Component {
         {/* Add the filters & display window */}
         <div className="columns">
           <div className="column is-3">
-            <Filters />
+            <Filters saveFilterState={this.saveFilterState} />
           </div>
           <div className="column is-9">
             <Display searchResults={this.state.searchResults} />

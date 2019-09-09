@@ -7,6 +7,12 @@ export default class SearchBar extends Component {
     this.state = {};
   }
 
+  _handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      this.props.triggerSearch();
+    }
+  };
+
   render() {
     return (
       <Fragment>
@@ -39,20 +45,16 @@ export default class SearchBar extends Component {
                       className="input search__field"
                       type="text"
                       placeholder="Search Database..."
-                      // onChange={e =>
-                      //   this.props.saveSearchResults(e.target.value)
-                      // }
                       onChange={e => {
-                        // e.preventDefault();
                         this.props.saveSearchResult(e.target.value);
                       }}
+                      onKeyDown={this._handleKeyDown}
                     />
                   </div>
                   <div className="control">
                     <a
                       className="button is-info search__button"
                       onClick={e => {
-                        // e.preventDefault();
                         this.props.triggerSearch();
                       }}
                     >

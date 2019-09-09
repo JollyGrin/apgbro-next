@@ -1,6 +1,31 @@
 import React, { Component, Fragment } from 'react';
 
 export default class Filters extends Component {
+  sortRef = React.createRef();
+
+  gradeRef = React.createRef();
+
+  countryRef = React.createRef();
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchFilters: {
+        sort: '',
+        grade: '',
+        country: ''
+      }
+    };
+  }
+
+  grabFilterState = () => {
+    const sort = this.sortRef.current.value;
+    const grade = this.gradeRef.current.value;
+    const country = this.countryRef.current.value;
+
+    this.props.saveFilterState({ sort, grade, country });
+  };
+
   render() {
     return (
       <Fragment>
@@ -8,7 +33,14 @@ export default class Filters extends Component {
           <p className="menu-label">Sorting Options</p>
 
           <div className="select">
-            <select id="filter__sort">
+            <select
+              ref={this.sortRef}
+              id="filter__sort"
+              // onChange={e => {
+              //   this.props.saveFilterState({ sort: e.target.value });
+              // }}
+              onChange={this.grabFilterState}
+            >
               <option></option>
               <option>Grade (High -> Low)</option>
               <option>Grade (Low -> High)</option>
@@ -29,7 +61,14 @@ export default class Filters extends Component {
           <p className="help">APG Grade</p>
           <div className="control">
             <div className="select">
-              <select id="filter__grade">
+              <select
+                ref={this.gradeRef}
+                id="filter__grade"
+                // onChange={e => {
+                //   this.props.saveFilterState({ grade: e.target.value });
+                // }}
+                onChange={this.grabFilterState}
+              >
                 <option></option>
                 <option>A++</option>
                 <option>A+</option>
@@ -50,7 +89,14 @@ export default class Filters extends Component {
           <p className="help">Country</p>
           <div className="control">
             <div className="select">
-              <select id="filter__country">
+              <select
+                ref={this.countryRef}
+                id="filter__country"
+                // onChange={e => {
+                //   this.props.saveFilterState({ country: e.target.value });
+                // }}
+                onChange={this.grabFilterState}
+              >
                 <option></option>
                 <option>France</option>
                 <option>Germany</option>
