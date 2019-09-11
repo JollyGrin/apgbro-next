@@ -20,16 +20,16 @@ export default class SearchBar extends Component {
           <div className="column">
             <div className="columns is-vcentered">
               <div className="column">
-                <span className="subtitle">Searching for:</span>
+                {/* <span className="subtitle">Searching for:</span> */}
                 <span
                   id="search__term"
                   className="subtitle has-text-weight-bold"
                 >
-                  {` `}Malls in Barcelona
+                  {` `}
                 </span>
-                <br />
-                <br />
-                <span className="help">Filtering for:</span>
+                {/* <br />
+                <br /> */}
+                {/* <span className="help">Filtering for:</span> */}
                 <div className="filter__tags">{/* add tags */}</div>
               </div>
               <div className="column">

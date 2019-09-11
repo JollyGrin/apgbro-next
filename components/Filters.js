@@ -36,9 +36,6 @@ export default class Filters extends Component {
             <select
               ref={this.sortRef}
               id="filter__sort"
-              // onChange={e => {
-              //   this.props.saveFilterState({ sort: e.target.value });
-              // }}
               onChange={this.grabFilterState}
             >
               <option></option>
@@ -64,9 +61,6 @@ export default class Filters extends Component {
               <select
                 ref={this.gradeRef}
                 id="filter__grade"
-                // onChange={e => {
-                //   this.props.saveFilterState({ grade: e.target.value });
-                // }}
                 onChange={this.grabFilterState}
               >
                 <option></option>
@@ -92,9 +86,6 @@ export default class Filters extends Component {
               <select
                 ref={this.countryRef}
                 id="filter__country"
-                // onChange={e => {
-                //   this.props.saveFilterState({ country: e.target.value });
-                // }}
                 onChange={this.grabFilterState}
               >
                 <option></option>

@@ -1,6 +1,14 @@
 import React, { Component, Fragment } from 'react';
 
 export default class ListItem extends Component {
+  resultTitle = React.createRef();
+
+  saveModalTitle = () => {
+    this.props.triggerModal(this.resultTitle.current.innerText);
+    // console.log(this.resultTitle.current.innerText);
+    // console.log('test');
+  };
+
   render() {
     const { item } = this.props;
 
@@ -29,7 +37,14 @@ export default class ListItem extends Component {
     return (
       <Fragment>
         <article className="post">
-          <a className="result__title">{resTitle}</a>
+          {/* {console.log(this.props.triggerModal} */}
+          <a
+            ref={this.resultTitle}
+            className="result__title"
+            onClick={this.saveModalTitle}
+          >
+            {resTitle}
+          </a>
           <div className="media-content">
             <div className="content">
               <p>
