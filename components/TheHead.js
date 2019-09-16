@@ -6,5 +6,9 @@ export default () => (
     <meta charSet="utf-8" />
     <title>Test</title>
     <link rel="stylesheet" type="text/css" href="/static/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css"
+    ></link>
   </Head>
 );

@@ -97,16 +97,6 @@ export default class Filters extends Component {
               </select>
             </div>
           </div>
-          <br />
-
-          <p className="control">
-            <a id="filter__button" className="button is-info">
-              Add Filters
-            </a>
-            <a id="filter__clear" className="button is-text">
-              Clear Filters
-            </a>
-          </p>
         </aside>
       </Fragment>
     );

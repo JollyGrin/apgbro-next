@@ -4,7 +4,9 @@ import Filters from '../components/Filters';
 import Display from '../components/Display';
 import Modal from '../components/Modal';
 import { getResults, getModal } from '../lib/db';
-import { filter } from 'minimatch';
+// import { filter } from 'minimatch';
+import ModalXY from '../components/ModalXY';
+import TheHead from '../components/TheHead';
 
 export default class index extends Component {
   constructor(props) {
@@ -19,7 +21,8 @@ export default class index extends Component {
       },
       modalName: '',
       modalActive: false,
-      modalResults: []
+      modalResults: [],
+      spinner: false
     };
   }
 
@@ -42,6 +45,7 @@ export default class index extends Component {
   triggerSearch = () => {
     const searchInput = this.state.searchValue;
     const filterInput = this.state.searchFilters;
+    this.setState({ spinner: true });
 
     getResults({
       query: searchInput,
@@ -50,6 +54,7 @@ export default class index extends Component {
       quality_grade_apg: filterInput.grade
     }).then(obj => {
       const searchResults = [];
+      this.setState({ spinner: false });
       obj.forEach(item => {
         searchResults.push(item);
       });
@@ -59,10 +64,28 @@ export default class index extends Component {
 
   triggerModal = resultTitle => {
     console.log(resultTitle);
+    this.setState({ modalActive: true });
+    this.setState({ spinner: true });
     getModal({
       name: resultTitle
     }).then(modalResults => {
+      this.setState({ spinner: false });
       this.setState({ modalName: resultTitle });
+      this.setState({ modalResults });
+      console.log(this.state.modalResults, 'index modal results');
+    });
+  };
+
+  refreshModal = ({ title, x, y }) => {
+    this.setState({ modalResults: '' });
+    this.setState({ spinner: true });
+    getModal({
+      name: title,
+      x,
+      y
+    }).then(modalResults => {
+      this.setState({ spinner: false });
+      this.setState({ modalName: title });
       this.setState({ modalResults });
       console.log(this.state.modalResults, 'index modal results');
       this.setState({ modalActive: true });
@@ -87,6 +110,7 @@ export default class index extends Component {
   render() {
     return (
       <div>
+        <TheHead />
         <SearchBar
           saveSearchResult={this.saveSearchResult}
           triggerSearch={this.triggerSearch}
@@ -104,6 +128,7 @@ export default class index extends Component {
             <Display
               searchResults={this.state.searchResults}
               triggerModal={this.triggerModal}
+              spinnerStatus={this.state.spinner}
             />
           </div>
           <div className={this.showModal()}>
@@ -113,6 +138,8 @@ export default class index extends Component {
                 modalName={this.state.modalName}
                 modalResults={this.state.modalResults}
                 closeModal={this.closeModal}
+                refreshModal={this.refreshModal}
+                spinnerStatus={this.state.spinner}
               />
             </div>
           </div>
