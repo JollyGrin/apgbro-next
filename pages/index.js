@@ -63,7 +63,8 @@ export default class index extends Component {
   };
 
   triggerModal = resultTitle => {
-    console.log(resultTitle);
+    // console.log(resultTitle);
+    this.setState({ modalResults: '' });
     this.setState({ modalActive: true });
     this.setState({ spinner: true });
     getModal({
