@@ -126,6 +126,8 @@ export default class index extends Component {
             <Filters saveFilterState={this.saveFilterState} />
           </div>
           <div className="column is-9">
+            <p className="menu-label is-pulled-right">Search Results</p>
+            <br />
             <Display
               searchResults={this.state.searchResults}
               triggerModal={this.triggerModal}
