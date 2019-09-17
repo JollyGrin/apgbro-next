@@ -45,6 +45,7 @@ export default class index extends Component {
   triggerSearch = () => {
     const searchInput = this.state.searchValue;
     const filterInput = this.state.searchFilters;
+    this.setState({ searchResults: [] });
     this.setState({ spinner: true });
 
     getResults({

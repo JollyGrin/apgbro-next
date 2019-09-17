@@ -58,12 +58,58 @@ export default class ListItem extends Component {
           >
             <i className="far fa-newspaper"></i>
           </a>
-          <div className="media-content">
-            <div className="content">
-              <p>
-                Grade APG/External:
-                <span className="tag">{prop['has quality grade apg']}</span>
-              </p>
+          <br />
+          <div className="media">
+            <div className="media-content">
+              <div className="content">
+                <p>
+                  Grade APG/External:
+                  <span className="tag">
+                    {prop['has quality grade apg']} /{' '}
+                    {prop['has quality grade external1']}
+                  </span>
+                  GLA:
+                  <span className="tag">{prop['has gla']}</span>
+                  Footfall:
+                  <span className="tag">
+                    {roundNum(prop['has footfall external1'])}
+                  </span>
+                  <br />
+                  NOI APG/External:
+                  <span className="tag">
+                    {prop['has noi yield apg']} /{' '}
+                    {prop['has noi yield external1']}
+                  </span>
+                  Area Income
+                  <span className="tag">{prop['has area income']}</span>
+                  <br />
+                  Catchment:
+                  <span className="tag">
+                    {roundNum(prop['has catchment external2'])}
+                  </span>
+                  Occupancy Rate:
+                  <span className="tag">
+                    {roundNum(prop['has occupancy rate'])}
+                  </span>
+                  Sales:
+                  <span className="tag">
+                    {roundNum(prop['has sales investee'])}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div className="media-right">
+              <span>
+                <a
+                  href={`https://www.google.com/maps/search/${resTitle}+${
+                    prop['has city']
+                  }+${prop['has country']}`}
+                  target="_blank"
+                >
+                  <i className="fas fa-map-pin"></i> {prop['has city']}
+                  <br /> {prop['has country']}
+                </a>
+              </span>
             </div>
           </div>
         </article>
@@ -75,6 +121,9 @@ export default class ListItem extends Component {
 
           .hide {
             display: none;
+          }
+          .result__title {
+            font-weight: 800;
           }
         `}</style>
       </Fragment>
