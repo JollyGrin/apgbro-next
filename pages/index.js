@@ -19,6 +19,7 @@ export default class index extends Component {
         grade: '',
         country: ''
       },
+      page: 1,
       modalName: '',
       modalActive: false,
       modalResults: [],
@@ -45,6 +46,7 @@ export default class index extends Component {
   triggerSearch = () => {
     const searchInput = this.state.searchValue;
     const filterInput = this.state.searchFilters;
+    const pageInput = this.state.page;
     this.setState({ searchResults: [] });
     this.setState({ spinner: true });
 
@@ -66,6 +68,7 @@ export default class index extends Component {
   triggerModal = resultTitle => {
     // console.log(resultTitle);
     this.setState({ modalResults: '' });
+    this.setState({ modalName: 'loading modal...' });
     this.setState({ modalActive: true });
     this.setState({ spinner: true });
     getModal({
@@ -80,6 +83,7 @@ export default class index extends Component {
 
   refreshModal = ({ title, x, y }) => {
     this.setState({ modalResults: '' });
+    this.setState({ modalName: 'loading modal...' });
     this.setState({ spinner: true });
     getModal({
       name: title,
@@ -134,6 +138,16 @@ export default class index extends Component {
               triggerModal={this.triggerModal}
               spinnerStatus={this.state.spinner}
             />
+            {/* PAGINATION */}
+            {/* <nav className="pagination" role="navigation">
+              <a className="pagination-previous is-pulled-right">Previous</a>
+              <a
+                className="pagination-next is-pulled-left"
+                onClick={this.nextPage}
+              >
+                Next Page
+              </a>
+            </nav> */}
           </div>
           <div className={this.showModal()}>
             <div className="modal-background"></div>
